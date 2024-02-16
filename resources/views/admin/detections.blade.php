@@ -85,8 +85,8 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="/admin_dashboard" class="nav-item nav-link active">Home</a>
-                            <a href="/admin_detections" class="nav-item nav-link">Detections</a>
+                            <a href="/admin_dashboard" class="nav-item nav-link">Home</a>
+                            <a href="/admin_detections" class="nav-item nav-link active">Detections</a>
                             <a href="/contactus" class="nav-item nav-link">Contact</a>
                         </div>
                         <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block"
@@ -100,56 +100,73 @@
 
 
 
-    <!-- About Start -->
-    <div class="container-fluid p-5" id="about">
+    <!-- Detections Start -->
+    <div class="container-fluid p-5">
         <div class="row gx-5">
-            <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
-                <div class="position-relative h-100">
-                    <img class="position-absolute w-100 h-100 rounded" src="img/about.jpg" style="object-fit: cover;">
+            <div class="col-lg-12">
+                <div class="section-title mb-4">
+                    <h5 class="position-relative d-inline-block text-primary text-uppercase">Quality Analysis</h5>
+                    <h1 class="display-5 mb-0">Detections Table</h1>
                 </div>
-            </div>
-            <div class="col-lg-7">
-                <div class="mb-4">
-                    <h5 class="text-primary text-uppercase">About Us</h5>
-                    <h1 class="display-3 text-uppercase mb-0">Welcome to Clothy</h1>
+                <div class="section-body mb-2">
                 </div>
-                <h4 class="text-body mb-4">At Clothy, we are
-                    passionate about revolutionizing the textile industry through cutting-edge technology. Our team
-                    consists of experts in machine learning, computer vision, and textile engineering, driven by a
-                    shared vision to enhance quality control processes</h4>
-                <div class="rounded bg-dark p-5">
-                    <ul class="nav nav-pills justify-content-between mb-3">
-                        <li class="nav-item w-50">
-                            <a class="nav-link text-uppercase text-center w-100 active" data-bs-toggle="pill"
-                                href="#pills-1">About Us</a>
-                        </li>
-                        <li class="nav-item w-50">
-                            <a class="nav-link text-uppercase text-center w-100" data-bs-toggle="pill"
-                                href="#pills-2">Why Choose Us</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="pills-1">
-                            <p class="text-secondary mb-0">At Clothy, we believe in transparency, reliability, and
-                                customer satisfaction. We work closely with our clients to understand their unique needs
-                                and deliver tailored solutions that exceed expectations. Whether you're a small boutique
-                                or a large-scale manufacturer, Clothy is your trusted partner for flawless fabric
-                                quality assurance.</p>
-                        </div>
-                        <div class="tab-pane fade" id="pills-2">
-                            <p class="text-secondary mb-0">Choose Clothy for fabric quality assurance because we
-                                leverage cutting-edge technology in machine learning and computer vision, backed by our
-                                team's expertise in textile engineering and artificial intelligence. We offer customized
-                                solutions to meet your unique needs, ensuring reliability and consistency in detecting
-                                even the smallest defects. With exceptional customer service, we're committed to your
-                                satisfaction and delivering innovative solutions that set us apart in the industry.</p>
-                        </div>
-                    </div>
+                <div class="table-responsive mb-5">
+                    <table class="table border mb-0" id="sortTable">
+                        <thead class="table-light fw-semibold">
+                            <tr class="align-middle">
+                                <th class="text-center">
+                                    <svg class="icon" width="16" height="16" viewBox="0 0 50 50"
+                                        data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <style>
+                                                .cls-1 {
+                                                    fill: #231f20;
+                                                }
+
+                                                .cls-2 {
+                                                    fill: #00a1d3;
+                                                }
+
+                                                .cls-3 {
+                                                    fill: #ff8e5a;
+                                                }
+
+                                                .cls-4 {
+                                                    fill: #ffba50;
+                                                }
+                                            </style>
+                                        </defs>
+                                        <title />
+                                        <path class="cls-1"
+                                            d="M43.125,4.5H6.875A2.377,2.377,0,0,0,4.5,6.875v36.25A2.377,2.377,0,0,0,6.875,45.5h36.25A2.377,2.377,0,0,0,45.5,43.125V6.875A2.377,2.377,0,0,0,43.125,4.5ZM44.5,43.125A1.377,1.377,0,0,1,43.125,44.5H6.875A1.377,1.377,0,0,1,5.5,43.125V6.875A1.377,1.377,0,0,1,6.875,5.5h36.25A1.377,1.377,0,0,1,44.5,6.875Z" />
+                                        <path class="cls-1"
+                                            d="M40,39.5h-.375V12a2.5,2.5,0,0,0-2.5-2.5H35.5A2.5,2.5,0,0,0,33,12V39.5H28.377V22a2.5,2.5,0,0,0-2.5-2.5H24.252a2.5,2.5,0,0,0-2.5,2.5V39.5H17.129V32a2.5,2.5,0,0,0-2.5-2.5H13A2.5,2.5,0,0,0,10.5,32v7.5H10a.5.5,0,0,0,0,1H40a.5.5,0,0,0,0-1Z" />
+                                        <path class="cls-2"
+                                            d="M34,12a1.5,1.5,0,0,1,1.5-1.5h1.625a1.5,1.5,0,0,1,1.5,1.5V39.5H34Z" />
+                                        <path class="cls-3"
+                                            d="M22.752,22a1.5,1.5,0,0,1,1.5-1.5h1.625a1.5,1.5,0,0,1,1.5,1.5V39.5H22.752Z" />
+                                        <path class="cls-4"
+                                            d="M11.5,32A1.5,1.5,0,0,1,13,30.5h1.625a1.5,1.5,0,0,1,1.5,1.5v7.5H11.5Z" />
+                                        <path class="cls-1" d="M10,10.5h6.587a.5.5,0,0,0,0-1H10a.5.5,0,0,0,0,1Z" />
+                                        <path class="cls-1" d="M10,13.415h6.587a.5.5,0,0,0,0-1H10a.5.5,0,0,0,0,1Z" />
+                                        <path class="cls-1" d="M10,16.331h6.587a.5.5,0,0,0,0-1H10a.5.5,0,0,0,0,1Z" />
+                                    </svg>
+                                </th>
+                                <th>Client Name</th>
+                                <th class="text-center">Pet Name</th>
+                                <th>Date Submitted</th>
+                                <th class="text-center">Result Status</th>
+                                <th>Remarks</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- About End -->
+    <!-- Detections End -->
 
     <!-- Facts Start -->
     <div class="container-fluid bg-dark facts p-5 my-5">
