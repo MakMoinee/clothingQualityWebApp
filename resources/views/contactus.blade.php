@@ -83,9 +83,9 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="/" class="nav-item nav-link active">Home</a>
-                            <a href="#about" class="nav-item nav-link">About</a>
-                            <a href="/contactus" class="nav-item nav-link">Contact</a>
+                            <a href="/" class="nav-item nav-link">Home</a>
+                            <a href="/#about" class="nav-item nav-link">About</a>
+                            <a href="/contactus" class="nav-item nav-link active">Contact</a>
                             <a href="#signup" class="nav-item nav-link">Sign Up</a>
                         </div>
                         <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Login</a>
@@ -96,163 +96,46 @@
     </div>
     <!-- Header End -->
 
-
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 mb-5">
-        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h5 class="text-white text-uppercase">Precision Inspection with AI</h5>
-                            <h1 class="display-2 text-white text-uppercase mb-md-4">Ensuring every
-                                fabric meets impeccable quality standards.
-                            </h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Join Us</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h5 class="text-white text-uppercase">Streamlined Quality Assurance</h5>
-                            <h1 class="display-2 text-white text-uppercase mb-md-4">Say goodbye to imperfections, and
-                                hello to perfection with Clothy</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Join Us</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+    <!-- Contact Start -->
+    <div class="container-fluid p-5">
+        <div class="mb-5 text-center">
+            <h5 class="text-primary text-uppercase">Contact Us</h5>
+            <h1 class="display-3 text-uppercase mb-0">Get In Touch</h1>
         </div>
-    </div>
-    <!-- Carousel End -->
-
-
-    <!-- About Start -->
-    <div class="container-fluid p-5" id="about">
-        <div class="row gx-5">
-            <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
-                <div class="position-relative h-100">
-                    <img class="position-absolute w-100 h-100 rounded" src="img/about.jpg"
-                        style="object-fit: cover;">
+        <div class="row g-5 mb-5">
+            <div class="col-lg-4">
+                <div class="d-flex flex-column align-items-center bg-dark rounded text-center py-5 px-3">
+                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
+                        style="width: 60px; height: 60px;">
+                        <i class="fa fa-map-marker-alt fs-4 text-white"></i>
+                    </div>
+                    <h5 class="text-uppercase text-primary">Visit Us</h5>
+                    <p class="text-secondary mb-0">123 Street, New York, USA</p>
                 </div>
             </div>
-            <div class="col-lg-7">
-                <div class="mb-4">
-                    <h5 class="text-primary text-uppercase">About Us</h5>
-                    <h1 class="display-3 text-uppercase mb-0">Welcome to Clothy</h1>
-                </div>
-                <h4 class="text-body mb-4">At Clothy, we are
-                    passionate about revolutionizing the textile industry through cutting-edge technology. Our team
-                    consists of experts in machine learning, computer vision, and textile engineering, driven by a
-                    shared vision to enhance quality control processes</h4>
-                <div class="rounded bg-dark p-5">
-                    <ul class="nav nav-pills justify-content-between mb-3">
-                        <li class="nav-item w-50">
-                            <a class="nav-link text-uppercase text-center w-100 active" data-bs-toggle="pill"
-                                href="#pills-1">About Us</a>
-                        </li>
-                        <li class="nav-item w-50">
-                            <a class="nav-link text-uppercase text-center w-100" data-bs-toggle="pill"
-                                href="#pills-2">Why Choose Us</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="pills-1">
-                            <p class="text-secondary mb-0">At Clothy, we believe in transparency, reliability, and
-                                customer satisfaction. We work closely with our clients to understand their unique needs
-                                and deliver tailored solutions that exceed expectations. Whether you're a small boutique
-                                or a large-scale manufacturer, Clothy is your trusted partner for flawless fabric
-                                quality assurance.</p>
-                        </div>
-                        <div class="tab-pane fade" id="pills-2">
-                            <p class="text-secondary mb-0">Choose Clothy for fabric quality assurance because we
-                                leverage cutting-edge technology in machine learning and computer vision, backed by our
-                                team's expertise in textile engineering and artificial intelligence. We offer customized
-                                solutions to meet your unique needs, ensuring reliability and consistency in detecting
-                                even the smallest defects. With exceptional customer service, we're committed to your
-                                satisfaction and delivering innovative solutions that set us apart in the industry.</p>
-                        </div>
+            <div class="col-lg-4">
+                <div class="d-flex flex-column align-items-center bg-dark rounded text-center py-5 px-3">
+                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
+                        style="width: 60px; height: 60px;">
+                        <i class="fa fa-envelope fs-4 text-white"></i>
                     </div>
+                    <h5 class="text-uppercase text-primary">Email Us</h5>
+                    <p class="text-secondary mb-0">info@example.com</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="d-flex flex-column align-items-center bg-dark rounded text-center py-5 px-3">
+                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
+                        style="width: 60px; height: 60px;">
+                        <i class="fa fa-phone fs-4 text-white"></i>
+                    </div>
+                    <h5 class="text-uppercase text-primary">Call Us</h5>
+                    <p class="text-secondary mb-0">+012 345 6789</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- About End -->
-
-
-
-
-
-
-    <!-- Facts Start -->
-    <div class="container-fluid bg-dark facts p-5 my-5">
-        <div class="row gx-5 gy-4 py-5">
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <i class="fa fa-star fs-4 text-white"></i>
-                    </div>
-                    <div class="ps-4">
-                        <h5 class="text-secondary text-uppercase">Experience</h5>
-                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">12345</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <i class="fa fa-users fs-4 text-white"></i>
-                    </div>
-                    <div class="ps-4">
-                        <h5 class="text-secondary text-uppercase">Our Trainers</h5>
-                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">12345</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <i class="fa fa-check fs-4 text-white"></i>
-                    </div>
-                    <div class="ps-4">
-                        <h5 class="text-secondary text-uppercase">Complete Project</h5>
-                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">12345</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <i class="fa fa-mug-hot fs-4 text-white"></i>
-                    </div>
-                    <div class="ps-4">
-                        <h5 class="text-secondary text-uppercase">Happy Clients</h5>
-                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">12345</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Facts End -->
+    <!-- Contact End -->
 
 
     <!-- Footer Start -->
@@ -341,7 +224,8 @@
         <div class="row gx-5">
             <div class="col-lg-8">
                 <div class="py-lg-4 text-center">
-                    <p class="text-secondary mb-0">&copy; <a class="text-light fw-bold" href="#">Clothy</a>. All Rights Reserved.</p>
+                    <p class="text-secondary mb-0">&copy; <a class="text-light fw-bold" href="#">Clothy</a>.
+                        All Rights Reserved.</p>
                 </div>
             </div>
         </div>
