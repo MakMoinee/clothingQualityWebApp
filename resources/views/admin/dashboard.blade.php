@@ -88,11 +88,9 @@
                             <a href="/" class="nav-item nav-link active">Home</a>
                             <a href="#about" class="nav-item nav-link">About</a>
                             <a href="/contactus" class="nav-item nav-link">Contact</a>
-                            <a href="#signup" class="nav-item nav-link" data-bs-target="#signUpModal"
-                                data-bs-toggle="modal">Sign Up</a>
                         </div>
                         <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block"
-                            data-bs-target="#loginModal" data-bs-toggle="modal">Login</a>
+                            data-bs-target="#logoutModal" data-bs-toggle="modal">Logout</a>
                     </div>
                 </nav>
             </div>
@@ -101,60 +99,13 @@
     <!-- Header End -->
 
 
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 mb-5">
-        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h5 class="text-white text-uppercase">Precision Inspection with AI</h5>
-                            <h1 class="display-2 text-white text-uppercase mb-md-4">Ensuring every
-                                fabric meets impeccable quality standards.
-                            </h1>
-                            <a href="#signup" class="btn btn-primary py-md-3 px-md-5 me-3"
-                                data-bs-target="#signUpModal" data-bs-toggle="modal">Join Us</a>
-                            <a href="/contactus" class="btn btn-light py-md-3 px-md-5">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h5 class="text-white text-uppercase">Streamlined Quality Assurance</h5>
-                            <h1 class="display-2 text-white text-uppercase mb-md-4">Say goodbye to imperfections, and
-                                hello to perfection with Clothy</h1>
-                            <a href="#signup" class="btn btn-primary py-md-3 px-md-5 me-3"
-                                data-bs-target="#signUpModal" data-bs-toggle="modal">Join Us</a>
-                            <a href="/contactus" class="btn btn-light py-md-3 px-md-5">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-    <!-- Carousel End -->
-
 
     <!-- About Start -->
     <div class="container-fluid p-5" id="about">
         <div class="row gx-5">
             <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
                 <div class="position-relative h-100">
-                    <img class="position-absolute w-100 h-100 rounded" src="img/about.jpg"
-                        style="object-fit: cover;">
+                    <img class="position-absolute w-100 h-100 rounded" src="img/about.jpg" style="object-fit: cover;">
                 </div>
             </div>
             <div class="col-lg-7">
@@ -418,38 +369,30 @@
         </div>
     </div>
 
-    <div class="modal fade " id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+    <div class="modal fade " id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <h5 class="modal-title" id="logoutModalLabel">Logging Out</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <form action="/login" method="POST" enctype="multipart/form-data" autocomplete="off">
+                        <form action="/logout" method="GET" enctype="multipart/form-data" autocomplete="off">
                             @csrf
                             <center>
                                 <div class="form-group">
-                                    <input required class="form-control" type="email" name="email"
-                                        id="un" placeholder="Email">
+                                    <h2>Are You Sure You Want To Logout?</h2>
                                 </div>
                                 <br>
-                                <div class="form-group">
-                                    <input required class="form-control" type="password" name="password"
-                                        id="pw" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    {{-- <a href="#" style="margin-left: -50px;">Create Account</a> --}}
-                                    <a href="#" style="float: right;">Forgot Password?</a>
-                                </div>
                             </center>
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="btnLogin" value="yes">Login</button>
+                    <button type="submit" class="btn btn-primary" name="btnLogout" value="yes">Yes,
+                        Proceed</button>
                 </div>
                 </form>
             </div>
@@ -470,20 +413,7 @@
         </script>
         {{ session()->forget('existEmail') }}
     @endif
-    @if (session()->pull('successLogout'))
-        <script>
-            setTimeout(() => {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Successfully Logout',
-                    showConfirmButton: false,
-                    timer: 800
-                });
-            }, 500);
-        </script>
-        {{ session()->forget('successLogout') }}
-    @endif
+
     @if (session()->pull('successAddUser'))
         <script>
             setTimeout(() => {
@@ -511,6 +441,21 @@
             }, 500);
         </script>
         {{ session()->forget('errorAddUser') }}
+    @endif
+
+    @if (session()->pull('successLogin'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Successfully Login',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>
+        {{ session()->forget('successLogin') }}
     @endif
 </body>
 
