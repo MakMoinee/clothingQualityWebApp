@@ -29,6 +29,8 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -86,9 +88,11 @@
                             <a href="/" class="nav-item nav-link">Home</a>
                             <a href="/#about" class="nav-item nav-link">About</a>
                             <a href="/contactus" class="nav-item nav-link active">Contact</a>
-                            <a href="#signup" class="nav-item nav-link">Sign Up</a>
+                            <a href="#signup" class="nav-item nav-link" data-bs-target="#signUpModal"
+                                data-bs-toggle="modal">Sign Up</a>
                         </div>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Login</a>
+                        <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block"
+                            data-bs-target="#loginModal" data-bs-toggle="modal">Login</a>
                     </div>
                 </nav>
             </div>
@@ -151,7 +155,7 @@
                         </div>
                         <div class="d-flex mb-2">
                             <i class="bi bi-envelope-open text-primary me-2"></i>
-                            <p class="mb-0">info@example.com</p>
+                            <p class="mb-0">clothy@gmail.com</p>
                         </div>
                         <div class="d-flex mb-2">
                             <i class="bi bi-telephone text-primary me-2"></i>
@@ -204,20 +208,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div
-                    class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-5">
-                    <h4 class="text-uppercase text-white mb-4">Newsletter</h4>
-                    <h6 class="text-uppercase text-white">Subscribe Our Newsletter</h6>
-                    <p class="text-light">Amet justo diam dolor rebum lorem sit stet sea justo kasd</p>
-                    <form action="">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-white p-3" placeholder="Your Email">
-                            <button class="btn btn-dark">Sign Up</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container-fluid py-4 py-lg-0 px-5" style="background: #111111;">
@@ -247,6 +237,110 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <div class="modal fade " id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signUpModalLabel">Signup</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form action="/signup" method="POST" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
+                            <center>
+                                <div class="form-group">
+                                    <input required class="form-control" type="text" name="firstName"
+                                        id="fn" placeholder="First Name">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="middleName" id="mn"
+                                        placeholder="Middle Name">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="lastName" id="ln"
+                                        placeholder="Last Name">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <textarea required class="form-control" name="address" id="" cols="10" rows="3"
+                                        placeholder="Address"></textarea>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="birthDate" class="for"
+                                        style="float:left;margin-bottom: 10px;">Birth Date</label>
+                                    <input required type="date" name="birthDate" id=""
+                                        class="form-control">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input required type="number" name="phoneNumber" id=""
+                                        class="form-control" placeholder="Phone Number">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input required class="form-control" type="email" name="email"
+                                        id="un" placeholder="Email">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input required class="form-control" type="password" name="password"
+                                        id="pw" placeholder="Password">
+                                </div>
+                            </center>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="btnSignup" value="yes">Signup</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form action="/login" method="POST" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
+                            <center>
+                                <div class="form-group">
+                                    <input required class="form-control" type="email" name="email"
+                                        id="un" placeholder="Email">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input required class="form-control" type="password" name="password"
+                                        id="pw" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    {{-- <a href="#" style="margin-left: -50px;">Create Account</a> --}}
+                                    <a href="#" style="float: right;">Forgot Password?</a>
+                                </div>
+                            </center>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="btnLogin" value="yes">Login</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
