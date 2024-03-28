@@ -31,6 +31,7 @@
     <link href="css/style.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="/css/uploadStyle.css">
 </head>
 
 <body>
@@ -107,6 +108,7 @@
                 <div class="section-title mb-4">
                     <h5 class="position-relative d-inline-block text-primary text-uppercase">Quality Analysis</h5>
                     <h1 class="display-5 mb-0">Detections Table</h1>
+                    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
                 </div>
                 <div class="section-body mb-2">
                 </div>
@@ -153,8 +155,8 @@
                                     </svg>
                                 </th>
                                 <th>Client Name</th>
-                                <th class="text-center">Pet Name</th>
-                                <th>Date Submitted</th>
+                                <th class="text-center">Deffect Detected</th>
+                                <th>Date</th>
                                 <th class="text-center">Result Status</th>
                                 <th>Remarks</th>
                                 <th class="text-center">Action</th>
@@ -168,60 +170,6 @@
     </div>
     <!-- Detections End -->
 
-    <!-- Facts Start -->
-    <div class="container-fluid bg-dark facts p-5 my-5">
-        <div class="row gx-5 gy-4 py-5">
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <i class="fa fa-star fs-4 text-white"></i>
-                    </div>
-                    <div class="ps-4">
-                        <h5 class="text-secondary text-uppercase">Experience</h5>
-                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">12345</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <i class="fa fa-users fs-4 text-white"></i>
-                    </div>
-                    <div class="ps-4">
-                        <h5 class="text-secondary text-uppercase">Our Trainers</h5>
-                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">12345</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <i class="fa fa-check fs-4 text-white"></i>
-                    </div>
-                    <div class="ps-4">
-                        <h5 class="text-secondary text-uppercase">Complete Project</h5>
-                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">12345</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="d-flex">
-                    <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <i class="fa fa-mug-hot fs-4 text-white"></i>
-                    </div>
-                    <div class="ps-4">
-                        <h5 class="text-secondary text-uppercase">Happy Clients</h5>
-                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">12345</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Facts End -->
 
 
     <!-- Footer Start -->
@@ -319,6 +267,62 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <div class="modal fade " id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add Cloth</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form action="/admin_detections" method="POST" enctype="multipart/form-data"
+                            autocomplete="off">
+                            @csrf
+                            <div class="form-group" style="margin-top: 10px;">
+                                <button class="file-upload-btn" type="button"
+                                    onclick="$('.file-upload-input').trigger( 'click' )">Add
+                                    Image</button>
+
+                                <div class="image-upload-wrap">
+                                    <input required class="file-upload-input" name="files" type='file'
+                                        onchange="readURL(this);" accept="image/*" />
+                                    <div class="drag-text">
+                                        <h3>Drag and drop a file or select add Image</h3>
+                                    </div>
+                                </div>
+                                <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image" width="100%"
+                                        height="40%" />
+                                    <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove
+                                            <span class="image-title">Uploaded
+                                                Image</span></button>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <p><b>Important Note:</b> To ensure accurate results for the defect analysis,
+                                        we
+                                        recommend a cloth's actual photo.
+                                        Please note that using a different
+                                        image may result in vague or inconclusive results. Thank you for your
+                                        understanding and cooperation in helping us provide the best possible
+                                        service.</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="btnAdd" value="yes">Proceed
+                        Adding</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade " id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel"
         aria-hidden="true">
