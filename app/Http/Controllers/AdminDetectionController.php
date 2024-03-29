@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Spatie\FlareClient\Http\Client;
 
 class AdminDetectionController extends Controller
 {
@@ -112,7 +113,26 @@ class AdminDetectionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if (session()->exists('users')) {
+            $mUser = session()->pull("users");
+            session()->put("users", $mUser);
+
+            $userType = $mUser['userType'];
+
+            if ($userType != 1) {
+                return redirect("/logout");
+            }
+
+            if ($request->btnConfirm) {
+                $queryResult = DB::table("detections")->where('detectionID', $id)->get();
+                $data = json_decode($queryResult, true);
+                dd($data);
+                $this->callApi($id, $data[0]['imagePath']);
+            }
+
+            return redirect("/admin_detections");
+        }
+        return redirect("/");
     }
 
     /**
@@ -150,5 +170,31 @@ class AdminDetectionController extends Controller
             return redirect("/admin_detections");
         }
         return redirect("/");
+    }
+
+    private function callApi(string $id, string $imagePath): void
+    {
+        // dd($_SERVER['DOCUMENT_ROOT'] . '\data\results');
+        $client = new Client();
+        try {
+            $response = $client->post('http://localhost:5000/detect', [
+                'multipart' => [
+                    [
+                        'name' => 'id',
+                        'contents' => $id
+                    ],
+                    [
+                        'name' => 'image_url',
+                        'contents' => $imagePath
+                    ],
+                    [
+                        'name' => 'storagePath',
+                        'contents' => $_SERVER['DOCUMENT_ROOT'] . '\data\results'
+                    ]
+                ]
+            ]);
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 }

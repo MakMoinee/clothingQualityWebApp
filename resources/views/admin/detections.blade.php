@@ -88,7 +88,7 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="/admin_dashboard" class="nav-item nav-link">Home</a>
                             <a href="/admin_detections" class="nav-item nav-link active">Detections</a>
-                            <a href="/contactus" class="nav-item nav-link">Contact</a>
+                            <a href="/admin_users" class="nav-item nav-link">Users</a>
                         </div>
                         <a href="" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block"
                             data-bs-target="#logoutModal" data-bs-toggle="modal">Logout</a>
