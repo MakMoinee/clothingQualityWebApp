@@ -160,9 +160,46 @@
                                 <th class="text-center">Result Status</th>
                                 <th>Remarks</th>
                                 <th class="text-center">Action</th>
+                                <th></th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                            @foreach ($detections as $item)
+                                <tr class="align-middle">
+                                    <td class="text-center"></td>
+                                    <td>
+                                        {{ $item['lastName'] }}, {{ $item['firstName'] }} {{ $item['middleName'] }}
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($item['defect'] == 1)
+                                            True
+                                        @else
+                                            False
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{ (new DateTime($item['created_at']))->setTimezone(new DateTimeZone('Asia/Manila'))->format('Y-m-d h:i A') }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $item['status'] }}
+                                    </td>
+                                    <td>
+                                        {{ $item['remarks'] }}
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn" data-bs-toggle="modal" data-bs-target="#updateModal"
+                                            onclick="triggerUpdate({{ $item['detectionID'] }},'{{ $item['imagePath'] }}')">
+                                            <img src="/view.svg" alt="" srcset="">
+                                        </button>
+                                        <button class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                            onclick="triggerDelete({{ $item['detectionID'] }},'{{ $item['imagePath'] }}')">
+                                            <img src="/delete.svg" alt="" srcset="">
+                                        </button>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -324,6 +361,71 @@
         </div>
     </div>
 
+    <div class="modal fade " id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">View Cloth</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form id="updateForm" action="" method="POST" enctype="multipart/form-data"
+                            autocomplete="off">
+                            @method('put')
+                            @csrf
+                            <div class="form-group">
+                                <label for="imagePhoto">Cloth Uploaded:</label>
+                                <br>
+                                <img class="mt-2" id="updatePhoto" height="300px" width="100%" src=""
+                                    alt="" srcset="">
+                            </div>
+                            <br>
+                            <div>
+                                <p><b>Important Note:</b> Once confirmed, the cloth will be sent for detection analysis.
+                                    Please always make sure that its valid cloth to ensure accurate results</p>
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="btnConfirm" value="yes">Confirm Valid
+                        Cloth</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Cloth</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form id="deleteForm" action="" method="POST" enctype="multipart/form-data"
+                            autocomplete="off">
+                            @method('delete')
+                            @csrf
+                            <div class="form-group">
+                                <h3>Are You Sure You Want To Delete This?</h3>
+                                <input type="hidden" name="imagePath" id="deleteImagePath">
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="btnDelete" value="yes">Confirm
+                        Delete</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade " id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -421,6 +523,22 @@
     </div>
 
     <script>
+        function triggerUpdate(id, imagePath) {
+            let form = document.getElementById('updateForm');
+            form.action = `/admin_detections/${id}`;
+
+            let updatePhoto = document.getElementById('updatePhoto');
+            updatePhoto.src = imagePath;
+        }
+
+        function triggerDelete(id, imagePath) {
+            let form = document.getElementById('deleteForm');
+            form.action = `/admin_detections/${id}`;
+
+            let deleteImagePath = document.getElementById('deleteImagePath');
+            deleteImagePath.src = imagePath;
+        }
+
         function readURL(input) {
             if (input.files && input.files[0]) {
 
@@ -470,19 +588,49 @@
         {{ session()->forget('existEmail') }}
     @endif
 
-    @if (session()->pull('successAddUser'))
+    @if (session()->pull('successDelete'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Created An Account',
+                    title: 'Successfully Deleted Item',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('successAddUser') }}
+        {{ session()->forget('successDelete') }}
+    @endif
+
+    @if (session()->pull('errorDelete'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Failed To Delete Item, Please try again later',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>
+        {{ session()->forget('errorDelete') }}
+    @endif
+
+    @if (session()->pull('errorAddCloth'))
+        <script>
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Failed To Add Cloth, Please try again later',
+                    showConfirmButton: false,
+                    timer: 800
+                });
+            }, 500);
+        </script>
+        {{ session()->forget('errorAddCloth') }}
     @endif
 
     @if (session()->pull('errorMimeTypeNotValid'))
@@ -500,19 +648,19 @@
         {{ session()->forget('errorMimeTypeNotValid') }}
     @endif
 
-    @if (session()->pull('successLogin'))
+    @if (session()->pull('successAddCloth'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Successfully Login',
+                    title: 'Successfully Added Cloth',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('successLogin') }}
+        {{ session()->forget('successAddCloth') }}
     @endif
 </body>
 

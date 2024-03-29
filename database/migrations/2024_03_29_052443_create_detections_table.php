@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('detectionID')->autoIncrement();
             $table->string('imagePath')->nullable(false);
             $table->string('status')->nullable(false);
-            $table->boolean('defect')->nullable(false);
+            $table->boolean('defect')->nullable(false)->default(false);
             $table->string('remarks')->nullable(true);
             $table->integer('userID')->nullable(false);
             $table->timestamps();

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detections;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class AdminDetectionController extends Controller
 {
@@ -22,7 +25,10 @@ class AdminDetectionController extends Controller
                 return redirect("/logout");
             }
 
-            return view('admin.detections');
+
+            $data = json_decode(DB::table('vwcloths')->get(), true);
+
+            return view('admin.detections', ['detections' => $data]);
         }
     }
 
@@ -112,8 +118,37 @@ class AdminDetectionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Request $request)
     {
-        //
+        if (session()->exists('users')) {
+            $mUser = session()->pull("users");
+            session()->put("users", $mUser);
+
+            $userType = $mUser['userType'];
+
+            if ($userType != 1) {
+                return redirect("/logout");
+            }
+
+            if ($request->btnDelete) {
+                try {
+                    $originalDirectoryPath = $request->imagePath;
+                    if ($originalDirectoryPath) {
+                        $destinationPath = $_SERVER['DOCUMENT_ROOT'] . $originalDirectoryPath;
+                        File::delete($destinationPath);
+                    }
+                } catch (Exception $e1) {
+                }
+
+                $deleteCount = DB::table('detections')->where('detectionID', '=', $id)->delete();
+                if ($deleteCount > 0) {
+                    session()->put("successDelete", true);
+                } else {
+                    session()->put("errorDelete", true);
+                }
+            }
+            return redirect("/admin_detections");
+        }
+        return redirect("/");
     }
 }
