@@ -420,6 +420,41 @@
         </div>
     </div>
 
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.image-upload-wrap').hide();
+
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('.file-upload-content').show();
+
+                    $('.image-title').html(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+        }
+        $('.image-upload-wrap').bind('dragover', function() {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function() {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
+    </script>
+
     @if (session()->pull('existEmail'))
         <script>
             setTimeout(() => {
@@ -449,19 +484,20 @@
         </script>
         {{ session()->forget('successAddUser') }}
     @endif
-    @if (session()->pull('errorAddUser'))
+
+    @if (session()->pull('errorMimeTypeNotValid'))
         <script>
             setTimeout(() => {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: 'Failed to add User, Please try again later',
+                    title: 'File Format Not Valid, Please try again later',
                     showConfirmButton: false,
                     timer: 800
                 });
             }, 500);
         </script>
-        {{ session()->forget('errorAddUser') }}
+        {{ session()->forget('errorMimeTypeNotValid') }}
     @endif
 
     @if (session()->pull('successLogin'))

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detections;
 use Illuminate\Http\Request;
 
 class AdminDetectionController extends Controller
@@ -38,7 +39,50 @@ class AdminDetectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (session()->exists('users')) {
+            $mUser = session()->pull("users");
+            session()->put("users", $mUser);
+
+            $userType = $mUser['userType'];
+            $userID = $mUser['userID'];
+
+            if ($userType != 1) {
+                return redirect("/logout");
+            }
+
+            if ($request->btnAdd) {
+                $files = $request->file("files");
+                $fileName = "";
+
+                if ($files) {
+                    $mimeType = $files->getMimeType();
+                    if ($mimeType == "image/png" || $mimeType == "image/jpg" || $mimeType == "image/JPG" || $mimeType == "image/JPEG" || $mimeType == "image/jpeg" || $mimeType == "image/PNG") {
+                        $destinationPath = $_SERVER['DOCUMENT_ROOT'] . '/data/clothes';
+                        $fileName = strtotime(now()) . "." . $files->getClientOriginalExtension();
+                        $isFile = $files->move($destinationPath,  $fileName);
+                        chmod($destinationPath, 0755);
+
+                        if ($fileName) {
+                            $newDetection = new Detections();
+                            $newDetection->userID = $userID;
+                            $newDetection->imagePath = '/data/clothes/' . $fileName;
+                            $newDetection->status = 'Waiting For Confirmation';
+                            $isSave = $newDetection->save();
+                            if ($isSave) {
+                                session()->put("successAddCloth", true);
+                            } else {
+                                session()->put("errorAddCloth", true);
+                            }
+                        }
+                    } else {
+                        session()->put("errorMimeTypeNotValid", true);
+                    }
+                }
+            }
+
+            return redirect("/admin_detections");
+        }
+        return redirect("/");
     }
 
     /**
